@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rules — Charge-Pandy</title>
+<link rel="icon" type="image/png" href="web_icon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/rules.css">
+</head>
+<body>
+
+<button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+<div class="nav-scrim"></div>
+<nav class="site-nav">
+  <div class="brand"><img src="web_icon.png" alt="Charge-Pandy icon" class="brand-icon">CHARGE<span>-</span>PANDY</div>
+  <ul>
+    <li><a href="index.html" data-page="index.html">Home</a></li>
+    <li><a href="play.html" data-page="play.html">Play</a></li>
+    <li><a href="rules.html" data-page="rules.html">Rules</a></li>
+  </ul>
+  <div class="nav-foot">
+    <button class="theme-toggle"><span class="t-label">Dark Mode</span><span class="dot"></span></button>
+  </div>
+</nav>
+
+<div class="shell">
+  <header class="rules-hero wrap">
+    <p class="eyebrow">Read the room before the round starts</p>
+    <h1>How to play</h1>
+    <p class="lede">Every round opens the same way: two beats to sync up, then everyone moves at once. Read on for the core three, the advanced tech, and how a match is won.</p>
+  </header>
+
+  <section class="wrap beat-explain">
+    <div class="panel beat-panel">
+      <span class="eyebrow">The rhythm</span>
+      <h2>Clap. Clap. <span class="text-orange">Go.</span></h2>
+      <p>Slap your thighs (or clap) twice in sync with your opponent — that's the timing window. On the third beat, both players commit to a move simultaneously. No takebacks, no re-reads: you're locked in the instant the beat hits.</p>
+    </div>
+  </section>
+
+  <section class="wrap core-moves">
+    <p class="eyebrow">The core three</p>
+    <div class="move-detail-grid">
+      <article class="panel move-detail">
+        <img src="assets/pandys/pandy2_charge.png" alt="Charge">
+        <div>
+          <h3 class="text-blue">Charge</h3>
+          <p class="cost">Cost: none · Gain: +1 charge</p>
+          <p>Cross your arms and reload. Free to use, and the only way to earn ammo — but you generate zero defense while doing it. Get hit while charging and you're eliminated on the spot.</p>
+        </div>
+      </article>
+      <article class="panel move-detail">
+        <img src="assets/pandys/pandy6_shield.png" alt="Shield">
+        <div>
+          <h3>Shield</h3>
+          <p class="cost">Cost: none · Blocks: standard Boom</p>
+          <p>Cross your forearms and brace. Stops a normal Boom cold, free of charge. The tradeoff: you can't bank charges while shielding, and it does nothing against anything that pierces.</p>
+        </div>
+      </article>
+      <article class="panel move-detail">
+        <img src="assets/pandys/pandy11_boom.png" alt="Boom">
+        <div>
+          <h3 class="text-orange">Boom</h3>
+          <p class="cost">Cost: 1 charge · Blocked by: Shield</p>
+          <p>Point and fire. Eliminates anyone who isn't shielding — including someone mid-Charge. If you both Boom at once, you both go down. It's a read, not a guarantee.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap advanced-moves">
+    <p class="eyebrow">Advanced tech — banked charges only</p>
+    <h2>The pop-culture upgrades</h2>
+    <div class="adv-grid">
+      <article class="panel adv-card">
+        <div class="adv-badge">2 charges</div>
+        <h3>Double Boom</h3>
+        <p>A heavier shot that pierces a standard Shield outright. If your opponent's guarding, this is how you punish it.</p>
+      </article>
+      <article class="panel adv-card">
+        <div class="adv-badge">3 charges</div>
+        <h3>Ultimate <span class="text-orange">(Hadouken / Kamehameha)</span></h3>
+        <p>An unblockable finisher. It wins the exchange outright — unless it's answered by a Reflect.</p>
+      </article>
+      <article class="panel adv-card">
+        <div class="adv-badge">1 charge</div>
+        <h3>Reflect <span class="text-blue">(Mirror)</span></h3>
+        <p>A defensive gamble that sends any incoming attack — Boom, Double Boom, even an Ultimate — straight back at whoever fired it. Whiff it against a non-attack and the charge is wasted.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap match-rules">
+    <div class="panel match-panel">
+      <span class="eyebrow">Winning a match</span>
+      <h2>3 lives. Sudden reads. No draws.</h2>
+      <ul>
+        <li>Each fighter starts a match with <strong>3 lives</strong>.</li>
+        <li>Any successful hit — Boom, Double Boom, Ultimate, or a Reflected attack — removes one life.</li>
+        <li>Trading identical attacks costs <strong>both</strong> players a life.</li>
+        <li>Charges cap at <strong>4</strong>, so hoarding forever isn't free either.</li>
+        <li>First fighter to zero lives is eliminated — best 2-out-of-3 rounds takes the match.</li>
+      </ul>
+      <a class="btn btn-accent" href="play.html">Put it into practice</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>CHARGE-PANDY © 2026</span>
+      <span>Rules adapted from the schoolyard original</span>
+    </div>
+  </footer>
+</div>
+
+<script src="js/shell.js"></script>
+</body>
+</html>
