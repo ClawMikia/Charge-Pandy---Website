@@ -1,63 +1,36 @@
-/* =========================================================
-   CHARGE-PANDY — home.js
-   ========================================================= */
-(function(){
-  const roster = window.CP_ROSTER || [];
+/* Home page: counters, roster, first-launch intro. */
+(function () {
+  'use strict';
+  var CP = window.CP, store = CP.store;
+  var $ = function (id) { return document.getElementById(id); };
 
-  function buildStrip(){
-    const strip = document.getElementById('rosterStrip');
-    if(!strip) return;
-    strip.innerHTML = roster.map(p => `
-      <div class="rt-card">
-        <img src="${p.poses.charge}" alt="${p.name}" loading="lazy">
-        <div class="rt-tag">${p.tag}</div>
-      </div>
-    `).join('');
+  $('statPlayed').textContent = store.matchesPlayed();
+  $('statWon').textContent = store.matchesWon();
+
+  $('roster').innerHTML = CP.roster.map(function (c) {
+    return '<div class="tile cut sm"><img src="' + CP.sprite(c, 'charge') + '" alt="' + c.name + '"><div class="tag">' + c.tag + '</div></div>';
+  }).join('');
+
+  var intro = $('intro');
+  if (CP.lsGet('cp_first_launch', 'true') !== 'false') intro.hidden = false;
+
+  function startTutorial() {
+    CP.lsSet('cp_first_launch', 'false');
+    CP.sound.play('confirm');
+    setTimeout(function () { window.location.href = 'rules.html'; }, 170);
   }
+  $('btnStart').addEventListener('click', startTutorial);
+  $('btnEnter').addEventListener('click', function (e) { e.preventDefault(); CP.go('play.html'); });
+  $('btnLearn').addEventListener('click', function (e) { e.preventDefault(); CP.go('rules.html'); });
 
-  function heroCycle(){
-    const img = document.getElementById('heroPortrait');
-    const tag = document.getElementById('heroTag');
-    if(!img || !roster.length) return;
-    let i = 0;
-    setInterval(() => {
-      i = (i+1) % roster.length;
-      const p = roster[i];
-      img.style.opacity = 0;
-      setTimeout(() => {
-        img.src = p.poses.charge;
-        tag.textContent = p.name;
-        img.style.opacity = 1;
-      }, 260);
-    }, 3400);
-    img.style.transition = 'opacity .26s ease';
-  }
-
-  function heroMeterPulse(){
-    const cells = document.querySelectorAll('#heroMeter .cell');
-    if(!cells.length) return;
-    let n = 0;
-    setInterval(() => {
-      cells.forEach((c, idx) => c.classList.toggle('filled', idx <= n));
-      n = (n+1) % cells.length;
-    }, 900);
-  }
-
-  function beatLoop(){
-    const spans = document.querySelectorAll('#heroBeat span');
-    if(!spans.length) return;
-    let i = 0;
-    setInterval(() => {
-      spans.forEach(s => s.classList.remove('active'));
-      spans[i].classList.add('active');
-      i = (i+1) % spans.length;
-    }, 620);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    buildStrip();
-    heroCycle();
-    heroMeterPulse();
-    beatLoop();
+  CP.onKey(function (e) {
+    if (e.ctrlKey || e.metaKey) return false;
+    if (!intro.hidden) {
+      if (e.key === 'Enter') { startTutorial(); return true; }
+      return false;
+    }
+    if (e.key === 'Enter') { CP.go('play.html'); return true; }
+    if (e.key === 'l' || e.key === 'L') { CP.go('rules.html'); return true; }
+    return false;
   });
 })();

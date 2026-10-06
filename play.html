@@ -2,160 +2,83 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Play — Charge-Pandy</title>
-<link rel="icon" type="image/png" href="web_icon.png">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/game.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Charge-Pandy - Play</title>
+<meta name="description" content="Charge-Pandy - a rhythm-based Charge / Shield / Boom duel game.">
+<meta name="theme-color" content="#06060F">
+<link rel="icon" type="image/png" href="assets/app_icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cp_theme')||'dark')}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body class="play-page">
-
-<button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
-<div class="nav-scrim"></div>
-<nav class="site-nav">
-  <div class="brand"><img src="web_icon.png" alt="Charge-Pandy icon" class="brand-icon">CHARGE<span>-</span>PANDY</div>
-  <ul>
-    <li><a href="index.html" data-page="index.html">Home</a></li>
-    <li><a href="play.html" data-page="play.html">Play</a></li>
-    <li><a href="rules.html" data-page="rules.html">Rules</a></li>
-  </ul>
-  <div class="nav-foot">
-    <button class="theme-toggle"><span class="t-label">Dark Mode</span><span class="dot"></span></button>
-  </div>
-</nav>
-
+<body data-page="play">
 <div class="shell">
-  <div class="wrap arena-wrap">
-
-    <!-- ===== HUD ===== -->
-    <div class="hud panel">
-      <div class="hud-side hud-player">
-        <div class="hud-name" id="hudPlayerName">— select fighter —</div>
-        <div class="lives" id="hudPlayerLives"></div>
-        <div class="charge-meter" id="hudPlayerCharge">
-          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-        </div>
-      </div>
-
-      <div class="hud-mid">
-        <div class="round-tag" id="roundTag">ROUND 1</div>
-        <div class="vs">VS</div>
-        <button class="btn btn-ghost hud-swap" id="openSelect">Change Fighter</button>
-      </div>
-
-      <div class="hud-side hud-cpu">
-        <div class="hud-name" id="hudCpuName">— CPU —</div>
-        <div class="lives" id="hudCpuLives"></div>
-        <div class="charge-meter" id="hudCpuCharge">
-          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== STAGE ===== -->
-    <div class="stage panel">
-      <div class="stage-bg"></div>
-
-      <div class="fighter fighter-player" id="fighterPlayer">
-        <img id="playerSprite" src="" alt="Your fighter">
-        <div class="hit-flash"></div>
-      </div>
-
-      <div class="beat-hud" id="beatHud">
-        <div class="beat-dot" data-beat="1"></div>
-        <div class="beat-dot" data-beat="2"></div>
-        <div class="beat-word" id="beatWord">CLAP</div>
-      </div>
-
-      <div class="fighter fighter-cpu" id="fighterCpu">
-        <img id="cpuSprite" src="" alt="CPU fighter">
-        <div class="hit-flash"></div>
-      </div>
-
-      <div class="fx-layer" id="fxLayer"></div>
-    </div>
-
-    <!-- ===== FEED ===== -->
-    <div class="feed-line" id="feedLine">Choose your fighter to begin.</div>
-
-    <!-- ===== CONTROLS ===== -->
-    <div class="controls panel" id="controls">
-      <button class="move-btn" data-move="charge">
-        <span class="mb-icon">⚡</span><span>Charge</span><small>free</small>
-      </button>
-      <button class="move-btn" data-move="shield">
-        <span class="mb-icon">🛡</span><span>Shield</span><small>free</small>
-      </button>
-      <button class="move-btn" data-move="boom">
-        <span class="mb-icon">🔫</span><span>Boom</span><small>1 charge</small>
-      </button>
-      <button class="move-btn" data-move="dboom">
-        <span class="mb-icon">💥</span><span>Double Boom</span><small>2 charges</small>
-      </button>
-      <button class="move-btn" data-move="reflect">
-        <span class="mb-icon">🌀</span><span>Reflect</span><small>1 charge</small>
-      </button>
-      <button class="move-btn move-btn-ult" data-move="ultimate">
-        <span class="mb-icon">☄</span><span>Ultimate</span><small>3 charges</small>
-      </button>
-    </div>
-
-    <div class="reset-row">
-      <button class="btn btn-ghost" id="restartMatch">Restart Match</button>
-    </div>
-  </div>
-
-  <footer class="site-footer">
+  <main class="main">
     <div class="wrap">
-      <span>CHARGE-PANDY © 2026</span>
-      <span>Best 2 of 3 rounds wins the match</span>
-    </div>
-  </footer>
-</div>
 
-<!-- ===== CHARACTER SELECT MODAL ===== -->
-<div class="modal-scrim" id="selectScrim">
-  <div class="select-modal panel" role="dialog" aria-modal="true" aria-labelledby="selectTitle">
-    <div class="select-head">
-      <div>
-        <p class="eyebrow">Select screen</p>
-        <h2 id="selectTitle">Choose Your Pandy</h2>
-      </div>
-      <div class="select-preview">
-        <img id="selectPreviewImg" src="assets/pandys/pandy1_charge.png" alt="Preview">
-        <div class="select-preview-tag" id="selectPreviewTag">PANDY // RIOT</div>
-      </div>
-    </div>
-
-    <div class="select-grid" id="selectGrid"></div>
-
-    <div class="select-foot">
-      <div class="cpu-roll" id="cpuRoll">
-        <span class="eyebrow">CPU opponent</span>
-        <div class="cpu-roll-portrait">
-          <img id="cpuRollImg" src="assets/pandys/pandy2_charge.png" alt="CPU rolling">
+      <!-- ===== select screen ===== -->
+      <section id="selectView">
+        <header class="page-head">
+          <div class="eyebrow">Select screen</div>
+          <h1>Choose your Pandy</h1>
+        </header>
+        <div class="select-layout">
+          <div class="pick-grid" id="pickGrid"></div>
+          <aside class="loadout">
+            <div class="preview cut lg pad" id="preview"></div>
+            <div class="cpu-card cut alt" id="cpuCard"></div>
+            <button class="btn" id="btnConfirm" disabled data-keepfocus>Confirm &amp; Fight <span class="kbd">Enter</span></button>
+            <a class="btn ghost slim" id="btnBack" href="index.html">Back <span class="kbd">Esc</span></a>
+          </aside>
         </div>
-        <div class="cpu-roll-tag" id="cpuRollTag">rolling…</div>
-      </div>
-      <button class="btn btn-accent" id="confirmSelect" disabled>Confirm &amp; Fight</button>
+      </section>
+
+      <!-- ===== duel ===== -->
+      <section id="duelView" hidden>
+        <div class="stage cut lg">
+          <div class="inner" id="stageInner">
+            <div class="hud">
+              <div class="side p">
+                <div class="name" id="pName">- select fighter -</div>
+                <div class="lives" id="pLives"></div>
+                <div class="charges p" id="pCharges"></div>
+              </div>
+              <div class="mid">
+                <div class="score" id="scoreLine">ROUND 1 &middot; YOU 0 &ndash; 0 CPU</div>
+                <div class="vs">VS</div>
+                <div class="beat"><span class="dot" id="dot1"></span><span class="dot" id="dot2"></span><span class="word" id="beatWord">READY</span></div>
+              </div>
+              <div class="side cpu">
+                <div class="name" id="cName">- CPU -</div>
+                <div class="lives" id="cLives"></div>
+                <div class="charges c" id="cCharges"></div>
+              </div>
+            </div>
+            <div class="sprite p" id="spriteP"><img id="imgP" alt="" src=""></div>
+            <div class="sprite c" id="spriteC"><img id="imgC" alt="" src=""></div>
+            <div class="ult-flash" id="ultFlash"></div>
+          </div>
+        </div>
+        <div class="feed" id="feed"></div>
+        <div class="dock" id="dock"></div>
+        <div class="duel-actions">
+          <button class="btn ghost slim" id="btnChange" data-keepfocus>Change Fighter <span class="kbd">F</span></button>
+          <button class="btn ghost slim" id="btnRestart" data-keepfocus>Restart Match <span class="kbd">Ctrl+R</span></button>
+          <a class="btn ghost slim orange" id="btnQuit" href="index.html">Quit Match <span class="kbd">Esc</span></a>
+        </div>
+      </section>
+
     </div>
-  </div>
+  </main>
 </div>
 
-<!-- ===== RESULT MODAL ===== -->
-<div class="modal-scrim" id="resultScrim">
-  <div class="result-modal panel">
-    <p class="eyebrow" id="resultEyebrow">Round 1</p>
-    <h2 id="resultTitle">You Win!</h2>
-    <p id="resultBody" class="lede">Details here.</p>
-    <div class="result-actions">
-      <button class="btn btn-accent" id="resultContinue">Continue</button>
-    </div>
-  </div>
-</div>
-
-<script src="js/characters.js"></script>
-<script src="js/shell.js"></script>
-<script src="js/game.js"></script>
+<script src="js/seed.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/store.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+<script src="js/play.js"></script>
 </body>
 </html>

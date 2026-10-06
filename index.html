@@ -2,104 +2,63 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Charge-Pandy — Charge. Shield. Boom.</title>
-<link rel="icon" type="image/png" href="web_icon.png">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/home.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Charge-Pandy - Home</title>
+<meta name="description" content="Charge-Pandy - a rhythm-based Charge / Shield / Boom duel game.">
+<meta name="theme-color" content="#06060F">
+<link rel="icon" type="image/png" href="assets/app_icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cp_theme')||'dark')}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-<button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
-<div class="nav-scrim"></div>
-<nav class="site-nav">
-  <div class="brand"><img src="web_icon.png" alt="Charge-Pandy icon" class="brand-icon">CHARGE<span>-</span>PANDY</div>
-  <ul>
-    <li><a href="index.html" data-page="index.html">Home</a></li>
-    <li><a href="play.html" data-page="play.html">Play</a></li>
-    <li><a href="rules.html" data-page="rules.html">Rules</a></li>
-  </ul>
-  <div class="nav-foot">
-    <button class="theme-toggle"><span class="t-label">Dark Mode</span><span class="dot"></span></button>
-  </div>
-</nav>
-
+<body data-page="home">
 <div class="shell">
+  <main class="main">
+    <div class="wrap">
 
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <img src="web_icon.png" alt="Charge-Pandy icon" class="hero-icon">
-        <p class="eyebrow">A HAND-GAME, WEAPONIZED</p>
-        <h1>CLAP. CLAP.<br><span class="split"><span class="text-blue">CHARGE</span> / <span>SHIELD</span> / <span class="text-orange">BOOM</span></span></h1>
-        <p class="lede">The schoolyard classic — reloaded. Sync your rhythm with the CPU, bank your charges, and read your opponent's hands before they read yours. One wrong guess and you're eliminated.</p>
-        <div class="hero-actions">
-          <a class="btn btn-accent" href="play.html">Enter The Match</a>
-          <a class="btn btn-ghost" href="rules.html">Learn The Moves</a>
-        </div>
-        <div class="hero-meter">
-          <span class="eyebrow" style="margin-bottom:8px">Charge preview</span>
-          <div class="charge-meter" id="heroMeter">
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <section class="hero cut lg">
+        <div class="hero-copy">
+          <div class="eyebrow">A hand-game, weaponized</div>
+          <h1>Clap. Clap.<br>Charge / Shield / Boom</h1>
+          <p>The schoolyard classic &mdash; reloaded. Sync your rhythm with the CPU, bank your charges, and read your opponent's hands before they read yours. One wrong guess and you're eliminated.</p>
+          <div class="hero-actions">
+            <a class="btn" id="btnEnter" href="play.html">Enter The Match <span class="kbd">Enter</span></a>
+            <a class="btn ghost" id="btnLearn" href="rules.html">Learn The Moves <span class="kbd">L</span></a>
           </div>
         </div>
+        <aside class="hero-side">
+          <img class="logo" src="assets/app_icon.png" alt="Charge-Pandy">
+          <div class="stat"><div class="v" id="statPlayed">0</div><div class="l">Matches Played</div></div>
+          <div class="stat"><div class="v orange" id="statWon">0</div><div class="l">Matches Won</div></div>
+        </aside>
+      </section>
+
+      <div class="section-title">
+        <h2>Pick Your Pandy</h2>
+        <p>Every match opens with a select screen. Choose your design, the CPU rolls theirs at random &mdash; nobody enters the ring the same way twice.</p>
       </div>
+      <div class="roster" id="roster"></div>
 
-      <div class="hero-stage panel" id="heroStage">
-        <div class="stage-glow"></div>
-        <img id="heroPortrait" src="assets/pandys/pandy1_charge.png" alt="Pandy fighter portrait" class="hero-portrait">
-        <div class="stage-tag" id="heroTag">PANDY // RIOT</div>
-        <div class="stage-beat" id="heroBeat">
-          <span>CLAP</span><span>CLAP</span><span class="go">GO</span>
-        </div>
-      </div>
     </div>
-  </header>
-
-  <section class="moves wrap">
-    <p class="eyebrow">Three moves. Total mind games.</p>
-    <div class="move-grid">
-      <article class="panel move-card" data-move="charge">
-        <img src="assets/pandys/pandy4_charge.png" alt="Charge pose">
-        <h3 class="text-blue">Charge</h3>
-        <p>Bank a bullet. No cost, but you're wide open — attacked while charging and you're out.</p>
-      </article>
-      <article class="panel move-card" data-move="shield">
-        <img src="assets/pandys/pandy9_shield.png" alt="Shield pose">
-        <h3>Shield</h3>
-        <p>Block a standard Boom for free. Stops charging — and does nothing against pierce attacks.</p>
-      </article>
-      <article class="panel move-card" data-move="boom">
-        <img src="assets/pandys/pandy15_boom.png" alt="Boom pose">
-        <h3 class="text-orange">Boom</h3>
-        <p>Spend 1 charge to fire. Hits anyone not shielding. Trade attacks and you both go down.</p>
-      </article>
-    </div>
-    <p class="center more-moves">Plus <strong>Double Boom</strong>, the unblockable <strong>Ultimate</strong>, and the <strong>Reflect</strong> counter — <a href="rules.html">full breakdown here</a>.</p>
-  </section>
-
-  <section class="roster-teaser wrap">
-    <div class="rt-head">
-      <div>
-        <p class="eyebrow">20 fighters, one roster</p>
-        <h2>Pick your Pandy</h2>
-        <p class="lede">Every match opens with a select screen. Choose your design, the CPU rolls theirs at random — nobody enters the ring the same way twice.</p>
-      </div>
-      <a class="btn btn-primary" href="play.html">Open Select Screen</a>
-    </div>
-    <div class="rt-strip" id="rosterStrip" aria-hidden="true"></div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <span>CHARGE-PANDY © 2026</span>
-      <span>Built for the schoolyard, upgraded for the screen</span>
-    </div>
-  </footer>
+  </main>
 </div>
 
-<script src="js/characters.js"></script>
-<script src="js/shell.js"></script>
+<div class="intro" id="intro" hidden>
+  <div class="box">
+    <img src="assets/app_icon.png" alt="">
+    <h1>Welcome to<br>Charge-Pandy</h1>
+    <p>A rhythm-based, turn-by-turn duel game. Sync your rhythm, bank your charges, and defeat your opponent.</p>
+    <button class="btn" id="btnStart" data-keepfocus>Start Tutorial <span class="kbd">Enter</span></button>
+  </div>
+</div>
+
+<script src="js/seed.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/store.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
 <script src="js/home.js"></script>
 </body>
 </html>

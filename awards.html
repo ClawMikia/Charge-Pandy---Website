@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Charge-Pandy - Awards</title>
+<meta name="description" content="Charge-Pandy - a rhythm-based Charge / Shield / Boom duel game.">
+<meta name="theme-color" content="#06060F">
+<link rel="icon" type="image/png" href="assets/app_icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cp_theme')||'dark')}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="awards">
+<div class="shell">
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Awards &amp; progress</div>
+        <h1 id="levelTitle">Level 1 Fighter</h1>
+      </header>
+
+      <div class="award-summary">
+        <div class="stat big cut"><div class="v" id="sumLevel">1</div><div class="l">Level</div><div class="bar" style="margin-top:12px"><i id="sumBar" style="width:0%"></i></div></div>
+        <div class="stat cut"><div class="v" id="sumWins">0</div><div class="l">Wins</div></div>
+        <div class="stat cut"><div class="v" id="sumExp">0</div><div class="l">EXP</div></div>
+        <div class="stat cut"><div class="v" id="sumMedals">0</div><div class="l">Medals earned</div></div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" data-tab="achievements" data-keepfocus>Achievements<span class="count" id="cntAch"></span></button>
+        <button class="tab" role="tab" data-tab="medals" data-keepfocus>Medals<span class="count" id="cntMed"></span></button>
+        <button class="tab" role="tab" data-tab="quests" data-keepfocus>Active Quests<span class="count" id="cntQst"></span></button>
+      </div>
+      <div class="award-grid" id="awardGrid"></div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/seed.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/store.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+<script src="js/awards.js"></script>
+</body>
+</html>
