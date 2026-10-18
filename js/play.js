@@ -4,6 +4,7 @@
   var CP = window.CP, E = CP.engine, store = CP.store, snd = CP.sound;
   var $ = function (id) { return document.getElementById(id); };
   var sleep = CP.sleep;
+  var spriteRaw = CP.spriteRaw || CP.sprite; // un-recoloured sprites (picker grid + CPU)
 
   var selectView = $('selectView'), duelView = $('duelView');
 
@@ -24,7 +25,7 @@
       var b = document.createElement('button');
       b.className = 'pick cut sm';
       b.setAttribute('aria-label', c.name);
-      b.innerHTML = '<img src="' + CP.sprite(c, 'charge') + '" alt=""><div class="tag">' + c.tag + '</div>';
+      b.innerHTML = '<img src="' + spriteRaw(c, 'charge') + '" alt=""><div class="tag">' + c.tag + '</div>';
       b.addEventListener('click', function () {
         if (busy) return;
         cursor = i; cursorActive = false;
@@ -50,7 +51,7 @@
   }
 
   function renderCpu() {
-    cpuCard.innerHTML = '<img src="' + CP.sprite(cpuShown, 'charge') + '" alt="">' +
+    cpuCard.innerHTML = '<img src="' + spriteRaw(cpuShown, 'charge') + '" alt="">' +
       '<div><div class="t">CPU OPPONENT</div><div class="n">' + cpuText + '</div></div>';
   }
 
@@ -60,7 +61,7 @@
     rollTimer = setInterval(function () {
       cpuShown = roster[Math.floor(Math.random() * roster.length)];
       var img = cpuCard.querySelector('img');
-      if (img) img.src = CP.sprite(cpuShown, 'charge'); else renderCpu();
+      if (img) img.src = spriteRaw(cpuShown, 'charge'); else renderCpu();
     }, 90);
   }
   function stopRoll() { if (rollTimer) { clearInterval(rollTimer); rollTimer = null; } }
@@ -163,7 +164,7 @@
     $('dot2').classList.toggle('on', b === 'clap2' || b === 'go');
     $('beatWord').textContent = (b === 'clap1' || b === 'clap2') ? 'CLAP' : b === 'go' ? 'GO' : 'READY';
     if (G.player) setSrc(imgP, CP.sprite(G.player, G.pPose));
-    if (G.cpu) setSrc(imgC, CP.sprite(G.cpu, G.cPose));
+    if (G.cpu) setSrc(imgC, spriteRaw(G.cpu, G.cPose));
     $('feed').textContent = G.feed;
 
     var canPick = G.phase === 'beat';
@@ -191,6 +192,7 @@
 
   function showDuel() {
     selectView.hidden = true; duelView.hidden = false;
+    if (window.CPFX) CPFX.flash();
     stopRoll();
     render();
   }
@@ -265,6 +267,7 @@
     if (out.damageToCpu > 0) restartAnim(spriteC, 'hit', 400);
     if (out.damageToPlayer > 0) restartAnim(spriteP, 'hit', 400);
     if (pm === 'ultimate' || cm === 'ultimate') restartAnim(ultFlash, 'go', 600);
+    if (window.CPFX) CPFX.reveal({ pm: pm, cm: cm, dmgP: out.damageToPlayer, dmgC: out.damageToCpu, spriteP: spriteP, spriteC: spriteC });
 
     G.phase = 'resolve';
     G.pPose = E.MOVES[pm].pose; G.cPose = E.MOVES[cm].pose;
@@ -438,6 +441,9 @@
   });
 
   /* ---- boot ---- */
+  document.addEventListener('cp-recolor', function () {
+    if (!selectView.hidden) renderSelect(); else render();
+  });
   buildGrid();
   buildDock();
   showSelect();
